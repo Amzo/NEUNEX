@@ -1,4 +1,5 @@
 ﻿using Neunex.DataGenerator;
+using Neunex.DataSetGenerator;
 using Neunex.LabelEncoding;
 using System;
 using System.Collections.Generic;
@@ -15,16 +16,17 @@ namespace Neunex
     {
         static void Main(string[] args)
         {
-            string[] labels = { "Cat", "Dog", "horse", "cow" };
+            string[] labels = { "Cat", "Dog", "horse", "cow", "duck" };
 
 
             LabelEncoder encoder = new LabelEncoder();
             var encodedResults = encoder.encodeLabels(labels);
 
-            Data data = new Data();
+            DataSet datasetgen = new DataSet();
+            List<Tensor> dataset = new List<Tensor>();
 
-            Tensor results = data.generateDataPoint("Dog", encodedResults);
-            Console.WriteLine(results);
+            dataset = datasetgen.DataSetGen(100, encodedResults);
+            Console.WriteLine(dataset);
         }
     }
 }

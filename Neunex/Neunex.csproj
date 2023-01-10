@@ -150,6 +150,8 @@
   <ItemGroup>
     <Compile Include="DataGenerator\Data.cs" />
     <Compile Include="DataGenerator\IData.cs" />
+    <Compile Include="DataSetGenerator\DataSet.cs" />
+    <Compile Include="DataSetGenerator\IDataSet.cs" />
     <Compile Include="LabelEncoding\ILabelEncoder.cs" />
     <Compile Include="LabelEncoding\LabelEncoder.cs" />
     <Compile Include="Program.cs" />

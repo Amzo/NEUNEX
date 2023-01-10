@@ -15,10 +15,15 @@ namespace Neunex.DataGenerator
 {
     internal class Data : IData
     {
+        private static readonly Random random = new Random();
+        private static readonly object syncLock = new object();
+
         public static double GetRandomNumber(double minimum, double maximum)
         {
-            Random random = new Random();
-            return random.NextDouble() * (maximum - minimum) + minimum;
+            lock (syncLock)
+            { // synchronize
+                return random.NextDouble() * (maximum - minimum) + minimum; ;
+            }
         }
 
         public Tensor generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels)
@@ -39,7 +44,7 @@ namespace Neunex.DataGenerator
                     indexer++;
                 }
 
-                generated[indexer] = GetRandomNumber((double)0.5, (double)1.0);
+                generated[indexer] = GetRandomNumber((double)20, (double)100);
 
                 for (int x = 0; x < generated.Length; x++)
                 {
