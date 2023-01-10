@@ -1,7 +1,7 @@
 ﻿using Google.Protobuf.Reflection;
 using Keras.Layers;
+using Neunex.Activations;
 using Numpy;
-using NumSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using Tensorflow;
+using Tensorflow.NumPy;
 using static Tensorflow.Binding;
 
 namespace Neunex.DataGenerator
@@ -26,7 +27,7 @@ namespace Neunex.DataGenerator
             }
         }
 
-        public Tensor generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels)
+        public double[] generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels)
         {
             if (!encodedLabels.ContainsKey(targetLabel))
                 throw new Exception("Target label not found in encoded list");
@@ -53,8 +54,11 @@ namespace Neunex.DataGenerator
                         generated[x] = GetRandomNumber((double)0.0, generated[indexer]);
                     }
                 }
-                Tensor tensor = tf.convert_to_tensor(generated);
-                return tf.nn.softmax(tensor);
+                //Tensor tensor = tf.convert_to_tensor(generated);
+                //var results = tf.nn.softmax(tensor);
+                softmax test = new softmax();
+
+                return test.calculate(generated);
 
             }
         }

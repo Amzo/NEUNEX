@@ -10,6 +10,6 @@ namespace Neunex.DataSetGenerator
 {
     internal interface IDataSet
     {
-        List<Tensor> DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels);
+        (double[], NDarray) DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels);
     }
 }
