@@ -1,9 +1,11 @@
-﻿using Neunex.LabelEncoding;
+﻿using Neunex.DataGenerator;
+using Neunex.LabelEncoding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tensorflow;
 using Tensorflow.Keras.Datasets;
 
 
@@ -18,7 +20,11 @@ namespace Neunex
 
             LabelEncoder encoder = new LabelEncoder();
             var encodedResults = encoder.encodeLabels(labels);
-            Console.WriteLine(encodedResults);
+
+            Data data = new Data();
+
+            Tensor results = data.generateDataPoint("Dog", encodedResults);
+            Console.WriteLine(results);
         }
     }
 }

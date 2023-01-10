@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Numpy;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace Neunex.DataGenerator
 {
     internal interface IData
     {
-        Tensor generateDataPoint();
+        Tensor generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels);
     }
 }

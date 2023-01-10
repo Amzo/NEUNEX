@@ -9,6 +9,6 @@ namespace Neunex.LabelEncoding
 {
     internal interface ILabelEncoder
     {
-        List<NDarray> encodeLabels(string[] labels);  
+        Dictionary<string, NDarray> encodeLabels(string[] labels);  
     }
 }

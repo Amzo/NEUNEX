@@ -9,11 +9,11 @@ namespace Neunex.LabelEncoding
 {
     internal class LabelEncoder : ILabelEncoder
     {
-        public List<NDarray> encodeLabels(string[] labels)
+        public Dictionary<string, NDarray> encodeLabels(string[] labels)
         {
             int[] arr = new int[labels.Length];
             int currentIndex = 0;
-            List<NDarray> encoded = new List<NDarray>();
+            Dictionary<string, NDarray> encoded = new Dictionary<string, NDarray>();
 
             foreach (int i in arr)
             {
@@ -23,7 +23,7 @@ namespace Neunex.LabelEncoding
             foreach (string label in labels)
             {
                 arr[currentIndex] = 1;
-                encoded.Add(arr);
+                encoded.Add(label, arr);
                 arr[currentIndex] = 0;
                 currentIndex++;
             }

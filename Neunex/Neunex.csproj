@@ -148,6 +148,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataGenerator\Data.cs" />
     <Compile Include="DataGenerator\IData.cs" />
     <Compile Include="LabelEncoding\ILabelEncoder.cs" />
     <Compile Include="LabelEncoding\LabelEncoder.cs" />
