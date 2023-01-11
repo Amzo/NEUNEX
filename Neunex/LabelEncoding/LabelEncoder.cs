@@ -5,7 +5,7 @@ namespace Neunex.LabelEncoding
 {
     internal class LabelEncoder : ILabelEncoder
     {
-        public Dictionary<string, NDarray> encodeLabels(string[] labels)
+        public Dictionary<string, NDarray> OneHotEncode(string[] labels)
         {
             int[] arr = new int[labels.Length];
             int currentIndex = 0;
@@ -20,8 +20,6 @@ namespace Neunex.LabelEncoding
             }
 
             return encoded;
-
-
         }
     }
 }

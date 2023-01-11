@@ -19,7 +19,7 @@ namespace Neunex
 
 
             LabelEncoder encoder = new LabelEncoder();
-            var encodedResults = encoder.encodeLabels(labels);
+            var encodedResults = encoder.OneHotEncode(labels);
 
             DataSet datasetgen = new DataSet();
 
