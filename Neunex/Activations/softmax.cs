@@ -13,7 +13,7 @@ namespace Neunex.Activations
 
         public static double[] calculate(double[] data)
         {
-            var z = data.Select(i => i / 10);
+            var z = data.Select(i => i);
             var x = z.Select(Math.Exp);
 
             var sum_z_exp = x.Sum();
