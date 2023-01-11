@@ -11,11 +11,6 @@ namespace Neunex.LabelEncoding
             int currentIndex = 0;
             Dictionary<string, NDarray> encoded = new Dictionary<string, NDarray>();
 
-            foreach (int i in arr)
-            {
-                arr[i] = 0;
-            }
-
             foreach (string label in labels)
             {
                 arr[currentIndex] = 1;
