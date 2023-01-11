@@ -15,7 +15,12 @@ namespace Neunex
     {
         static void Main(string[] args)
         {
-            string[] labels = { "Cat", "Dog", "horse", "cow", "duck" };
+            var labels = new Dictionary<int, string>() {
+                {1,  "Cat"},
+                {2, "Dog"},
+                {3, "horse" },
+                {4, "cow" },
+                {5, "duck" }};
 
 
             LabelEncoder encoder = new LabelEncoder();

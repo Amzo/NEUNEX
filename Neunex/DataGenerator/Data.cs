@@ -1,4 +1,5 @@
-﻿using Google.Protobuf.Reflection;
+﻿using BenchmarkDotNet.Attributes;
+using Google.Protobuf.Reflection;
 using Keras.Layers;
 using Neunex.Activations;
 using Numpy;
@@ -19,6 +20,7 @@ namespace Neunex.DataGenerator
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();
 
+        [Benchmark]
         public static double GetRandomNumber(double minimum, double maximum)
         {
             lock (syncLock)
@@ -27,6 +29,7 @@ namespace Neunex.DataGenerator
             }
         }
 
+        [Benchmark]
         public double[] generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels)
         {
             if (!encodedLabels.ContainsKey(targetLabel))

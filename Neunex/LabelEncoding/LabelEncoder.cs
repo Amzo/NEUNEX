@@ -5,18 +5,17 @@ namespace Neunex.LabelEncoding
 {
     internal class LabelEncoder : ILabelEncoder
     {
-        public Dictionary<string, NDarray> OneHotEncode(string[] labels)
+        public Dictionary<string, NDarray> OneHotEncode(Dictionary<int, string> labels)
         {
-            int[] arr = new int[labels.Length];
-            int currentIndex = 0;
+            int[] arr = new int[labels.Count];
             Dictionary<string, NDarray> encoded = new Dictionary<string, NDarray>();
 
-            foreach (string label in labels)
+            // new loop
+            foreach (KeyValuePair<int, string> entry in labels)
             {
-                arr[currentIndex] = 1;
-                encoded.Add(label, arr);
-                arr[currentIndex] = 0;
-                currentIndex++;
+                arr[entry.Key - 1] = 1;
+                encoded.Add(entry.Value, arr);
+                arr[entry.Key - 1] = 0;
             }
 
             return encoded;

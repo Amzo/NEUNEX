@@ -1,4 +1,5 @@
-﻿using Neunex.DataGenerator;
+﻿using BenchmarkDotNet.Attributes;
+using Neunex.DataGenerator;
 using Numpy;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ namespace Neunex.DataSetGenerator
 {
     public class DataSet : IDataSet
     {
+        [Benchmark]
         public (double[], NDarray) DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels)
         {
             double[] dataset = new double[quantity * encodedLabels.Count()];

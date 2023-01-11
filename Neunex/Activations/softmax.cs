@@ -1,4 +1,5 @@
-﻿using Keras.Layers;
+﻿using BenchmarkDotNet.Attributes;
+using Keras.Layers;
 using Numpy;
 using System;
 using System.Collections.Generic;
@@ -10,9 +11,9 @@ namespace Neunex.Activations
 {
     public class softmax
     {
-
         public static double[] calculate(double[] data)
         {
+            // give them a probability of 1. Be nice.
             if (data.Length == 0)
                 return new double[] { 1.0 };
 
