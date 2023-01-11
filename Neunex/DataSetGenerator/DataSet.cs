@@ -14,16 +14,17 @@ namespace Neunex.DataSetGenerator
         public (double[], NDarray) DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels)
         {
             double[] dataset = new double[quantity * encodedLabels.Count()];
-            NDarray datalabels = np.arange(quantity * encodedLabels.Count()); ;
+            NDarray datalabels = np.arange(quantity * encodedLabels.Count());
+            int dataGenPerLabel = quantity / encodedLabels.Count();
+            Data data = new Data();
+            int index = 0;
+
             if (quantity % encodedLabels.Count() != 0)
             {
                 throw new Exception("Can't balance classes based on quantitiy provided");
             }
             else
             {
-                int dataGenPerLabel = quantity / encodedLabels.Count();
-                Data data = new Data();
-                int index = 0;
                 foreach (KeyValuePair<string, NDarray> entry in encodedLabels)
                 {
                     for (int i = 0; i < dataGenPerLabel; i++)
