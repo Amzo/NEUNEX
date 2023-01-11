@@ -13,7 +13,7 @@ namespace Neunex.Activations
 
         public static double[] calculate(double[] data)
         {
-            if (data.Length == 0);
+            if (data.Length == 0)
                 return new double[] { 1.0 };
 
             var z = data.Select(i => i);
