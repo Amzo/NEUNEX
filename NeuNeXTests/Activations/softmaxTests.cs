@@ -31,15 +31,18 @@ namespace NeuNeXTests.Activations
         public void TestSoftmaxPrecision()
         {
             var testArray = new double[] { 5, 8, 7, 3 };
-            var expectedResults = new double[] {
-                0.034952901291011960949897084527685464103421372685911,
-                0.70204778945315464171797414671768606170886362822167,
-                0.25826894845967292817661790770366938402863065047131,
-                0.0047303607961604691555108610509590901590843486211167
+
+            // max digits support byu
+            var expectedResults = new decimal[] {
+                0.034952901291011960949897084527685464103421372685911m,
+                0.70204778945315464171797414671768606170886362822167m,
+                0.25826894845967292817661790770366938402863065047131m,
+                0.0047303607961604691555108610509590901590843486211167m
             };
 
             var results = softmax.calculate(testArray);
-            bool isEqual = Enumerable.SequenceEqual(expectedResults, results);
+            double[] convertedExpected = Array.ConvertAll(expectedResults, x => (double)x);
+            bool isEqual = Enumerable.SequenceEqual(convertedExpected, results);
 
             Assert.IsTrue(isEqual);
         }
