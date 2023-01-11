@@ -11,7 +11,7 @@ namespace Neunex.Activations
     public class softmax
     {
 
-        public double[] calculate(double[] data)
+        public static double[] calculate(double[] data)
         {
             var z = data.Select(i => i / 10);
             var x = z.Select(Math.Exp);

@@ -33,19 +33,20 @@ namespace Neunex.DataGenerator
                 throw new Exception("Target label not found in encoded list");
             else
             {
-                Random nd = new Random();
                 double [] generated = new double[encodedLabels.Count()];
                 int indexer = 0;
 
+                // generate the target label first so all other targets generated after
+                // can be less than the main target
                 foreach(KeyValuePair<string, NDarray> entry in encodedLabels)
                 {
                     if (entry.Key == targetLabel)
+                    {
+                        generated[indexer] = GetRandomNumber((double)0, (double)100);
                         break;
-
+                    }
                     indexer++;
                 }
-
-                generated[indexer] = GetRandomNumber((double)20, (double)100);
 
                 for (int x = 0; x < generated.Length; x++)
                 {
@@ -54,12 +55,8 @@ namespace Neunex.DataGenerator
                         generated[x] = GetRandomNumber((double)0.0, generated[indexer]);
                     }
                 }
-                //Tensor tensor = tf.convert_to_tensor(generated);
-                //var results = tf.nn.softmax(tensor);
-                softmax test = new softmax();
 
-                return test.calculate(generated);
-
+                return softmax.calculate(generated);
             }
         }
     }
