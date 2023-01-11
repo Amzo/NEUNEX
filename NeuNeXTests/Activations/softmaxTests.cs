@@ -58,5 +58,17 @@ namespace NeuNeXTests.Activations
 
             Assert.IsTrue(isEqual);
         }
+
+        [TestMethod]
+        public void TestArrayOfOne()
+        {
+            double[] testArray = new double[] { 3 } ;
+            double[] expectedResults = new double[] { 1 };
+
+            var results = softmax.calculate(testArray);
+            bool isEqual = Enumerable.SequenceEqual(expectedResults, results);
+
+            Assert.IsTrue(isEqual);
+        }
     }
 }
