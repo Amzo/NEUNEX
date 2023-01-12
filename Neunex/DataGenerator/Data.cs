@@ -1,18 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Google.Protobuf.Reflection;
-using Keras.Layers;
 using Neunex.Activations;
 using Neunex.LabelEncoding;
-using Numpy;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using Tensorflow;
-using Tensorflow.NumPy;
-using static Tensorflow.Binding;
 
 namespace Neunex.DataGenerator
 {

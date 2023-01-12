@@ -3,11 +3,7 @@ using Keras.Models;
 using Neunex.DataSetGenerator;
 using Neunex.LabelEncoding;
 using System.Collections.Generic;
-using Tensorflow;
-using Tensorflow.Keras;
 using Numpy;
-using static Tensorflow.Binding;
-using System;
 
 namespace Neunex
 {
@@ -16,7 +12,7 @@ namespace Neunex
         static void Main(string[] args)
         {
             var labels = new Dictionary<int, string>() {
-                {1,  "Cat"},
+                {1, "Cat"},
                 {2, "Dog"},
                 {3, "horse" },
                 {4, "cow" },
