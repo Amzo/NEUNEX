@@ -19,13 +19,10 @@ namespace Neunex
                 {5, "duck" }};
 
 
-            LabelEncoder encoder = new LabelEncoder();
-            var encodedResults = encoder.OneHotEncode(labels);
+            var encodedResults = LabelEncoder.OneHotEncode(labels);
 
-            DataSet datasetgen = new DataSet();
-
-            (var x, var y) = datasetgen.DataSetGen(50000, encodedResults);
-            (var x_test, var y_test) = datasetgen.DataSetGen(50000, encodedResults);
+            (var x, var y) = DataGenerate.Generate(50000, encodedResults);
+            (var x_test, var y_test) = DataGenerate.Generate(50000, encodedResults);
 
             var m = np.array(x).reshape(500000, 5);
             var z = np.array(y).reshape(500000, 5);

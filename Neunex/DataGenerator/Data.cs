@@ -12,7 +12,7 @@ namespace Neunex.DataGenerator
         private static readonly object syncLock = new object();
 
         [Benchmark]
-        public static double GetRandomNumber(double minimum, double maximum)
+        private static double GetRandomNumber(double minimum, double maximum)
         {
             lock (syncLock)
             { // synchronize

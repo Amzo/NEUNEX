@@ -17,9 +17,9 @@ namespace Neunex.LabelEncoding
 
     }
 
-    internal class LabelEncoder : ILabelEncoder
+    internal class LabelEncoder
     {
-        public Dictionary<int, LabelStringKey> OneHotEncode(Dictionary<int, string> labels)
+        public static Dictionary<int, LabelStringKey> OneHotEncode(Dictionary<int, string> labels)
         {
             Dictionary<int, LabelStringKey> encoded = new Dictionary<int, LabelStringKey>();
             List<int> arr = new List<int>(new int[labels.Count]);

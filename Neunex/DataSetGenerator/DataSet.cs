@@ -7,16 +7,13 @@ using System.Linq;
 
 namespace Neunex.DataSetGenerator
 {
-    public class DataSet : IDataSet
+    internal class DataSet: IDataSet
     {
         [Benchmark]
         public (double[], int[]) DataSetGen(int quantity, Dictionary<int, LabelStringKey> encodedLabels)
         {
             List <double> dataset = new List<double>(quantity * encodedLabels.Count());
             List <int> datalabels = new List<int>(quantity * encodedLabels.Count());
-            int dataGenPerLabel = quantity / encodedLabels.Count();
-            Data data = new Data();
-            int index = encodedLabels.Count;
 
             if (quantity % encodedLabels.Count() != 0)
             {
@@ -26,10 +23,10 @@ namespace Neunex.DataSetGenerator
             {
                 foreach (KeyValuePair<int, LabelStringKey> entry in encodedLabels)
                 {
-                    for (int i = 0; i < dataGenPerLabel; i++)
+                    for (int i = 0; i < quantity / encodedLabels.Count(); i++)
                     {
                         datalabels.AddRange(entry.Value.Value);
-                        dataset.AddRange(data.generateDataPoint(index, entry.Key, entry.Value));
+                        dataset.AddRange(DataPoint.Get(encodedLabels.Count, entry.Key, entry.Value));
                     }
                 }
                 return (dataset.ToArray(), datalabels.ToArray());
