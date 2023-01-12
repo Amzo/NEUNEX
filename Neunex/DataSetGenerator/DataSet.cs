@@ -1,5 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Neunex.DataGenerator;
+using Neunex.LabelEncoding;
 using Numpy;
 using System;
 using System.Collections.Generic;
@@ -13,13 +14,13 @@ namespace Neunex.DataSetGenerator
     public class DataSet : IDataSet
     {
         [Benchmark]
-        public (double[], NDarray) DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels)
+        public (double[], int[]) DataSetGen(int quantity, Dictionary<int, LabelStringKey> encodedLabels)
         {
-            double[] dataset = new double[quantity * encodedLabels.Count()];
-            NDarray datalabels = np.arange(quantity * encodedLabels.Count());
+            List <double> dataset = new List<double>(quantity * encodedLabels.Count());
+            List <int> datalabels = new List<int>(quantity * encodedLabels.Count());
             int dataGenPerLabel = quantity / encodedLabels.Count();
             Data data = new Data();
-            int index = 0;
+            int index = encodedLabels.Count;
 
             if (quantity % encodedLabels.Count() != 0)
             {
@@ -27,21 +28,15 @@ namespace Neunex.DataSetGenerator
             }
             else
             {
-                foreach (KeyValuePair<string, NDarray> entry in encodedLabels)
+                foreach (KeyValuePair<int, LabelStringKey> entry in encodedLabels)
                 {
                     for (int i = 0; i < dataGenPerLabel; i++)
                     {
-                        var results = data.generateDataPoint(entry.Key, encodedLabels);
-
-                        for (int x = 0; x < results.Length; x++)
-                        {
-                            datalabels[index] = entry.Value[x];
-                            dataset[index] = results[x];
-                            index++;
-                        }
+                        datalabels.AddRange(entry.Value.Value);
+                        dataset.AddRange(data.generateDataPoint(index, entry.Key, entry.Value));
                     }
                 }
-                return (dataset, datalabels);
+                return (dataset.ToArray(), datalabels.ToArray());
             }
         }
     }

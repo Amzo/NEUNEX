@@ -31,12 +31,10 @@ namespace Neunex
             (var x, var y) = datasetgen.DataSetGen(50000, encodedResults);
             (var x_test, var y_test) = datasetgen.DataSetGen(50000, encodedResults);
 
-            var m = np.array(x).reshape(50000, 5);
-            var z = np.array(y).reshape(50000, 5);
-            var m_test = np.array(x_test).reshape(50000, 5);
-            var z_test = np.array(y_test).reshape(50000, 5);
-            //var train = np.array( new[,] { x[1] });
-            //Console.WriteLine(dataset);
+            var m = np.array(x).reshape(500000, 5);
+            var z = np.array(y).reshape(500000, 5);
+            var m_test = np.array(x_test).reshape(500000, 5);
+            var z_test = np.array(y_test).reshape(500000, 5);
 
             var model = new Sequential();
             model.Add(new Dense(10, activation: "sigmoid", input_shape: new Keras.Shape(5)));
@@ -47,9 +45,9 @@ namespace Neunex
             model.Compile(optimizer: "adam", loss: "categorical_crossentropy", metrics: new string[] { "accuracy" });
             model.Fit(m, z, batch_size: 256, epochs: 100, verbose: 1);
 
-            var score = model.Evaluate(m_test, z_test, verbose: 0);
-            Console.WriteLine($"Test loss: {score[0]}");
-            Console.WriteLine($"Test accuracy: {score[1]}");
+            //var score = model.Evaluate(m_test, z_test, verbose: 0);
+            //Console.WriteLine($"Test loss: {score[0]}");
+            //Console.WriteLine($"Test accuracy: {score[1]}");
         }
     }
 }

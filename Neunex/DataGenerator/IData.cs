@@ -1,4 +1,5 @@
-﻿using Numpy;
+﻿using Neunex.LabelEncoding;
+using Numpy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,6 @@ namespace Neunex.DataGenerator
 {
     internal interface IData
     {
-        double[] generateDataPoint(string targetLabel, Dictionary<string, NDarray> encodedLabels);
+        List<double> generateDataPoint(int size, int indexKey, LabelStringKey encodedLabels);
     }
 }

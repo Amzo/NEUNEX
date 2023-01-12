@@ -5,6 +5,6 @@ namespace Neunex.LabelEncoding
 {
     internal interface ILabelEncoder
     {
-        Dictionary<string, NDarray> OneHotEncode(Dictionary<int, string> labels);  
+        Dictionary<int, LabelStringKey> OneHotEncode(Dictionary<int, string> labels);  
     }
 }

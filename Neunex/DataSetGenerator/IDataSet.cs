@@ -1,4 +1,5 @@
-﻿using Numpy;
+﻿using Neunex.LabelEncoding;
+using Numpy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,6 @@ namespace Neunex.DataSetGenerator
 {
     internal interface IDataSet
     {
-        (double[], NDarray) DataSetGen(int quantity, Dictionary<string, NDarray> encodedLabels);
+        (double[], int[]) DataSetGen(int quantity, Dictionary<int, LabelStringKey> encodedLabels);
     }
 }

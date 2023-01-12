@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Neunex.Activations;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NeuNeXTests.Activations
@@ -11,7 +12,7 @@ namespace NeuNeXTests.Activations
         [TestMethod]
         public void TestSoftResults()
         {
-            var testArray = new[] { 1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0 };
+            var testArray = new List<double> { 1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0 };
             var expectedResults = new[] {
                 0.023640543021591385, 
                 0.064261658510496159, 
@@ -30,7 +31,7 @@ namespace NeuNeXTests.Activations
         [TestMethod]
         public void TestSoftmaxPrecision()
         {
-            var testArray = new double[] { 5, 8, 7, 3 };
+            var testArray = new List<double> { 5, 8, 7, 3 };
 
             // max digits support byu
             var expectedResults = new decimal[] {
@@ -50,8 +51,8 @@ namespace NeuNeXTests.Activations
         [TestMethod]
         public void TestEmptyArray()
         {
-            double[] testArray = new double[0];
-            double[] expectedResults = new double[] { 1 };
+            var  testArray = new List<double>();
+            var expectedResults = new double[] { 1 };
 
             var results = softmax.calculate(testArray);
             bool isEqual = Enumerable.SequenceEqual(expectedResults, results);
@@ -62,7 +63,7 @@ namespace NeuNeXTests.Activations
         [TestMethod]
         public void TestArrayOfOne()
         {
-            double[] testArray = new double[] { 3 } ;
+            var testArray = new List<double> { 3 } ;
             double[] expectedResults = new double[] { 1 };
 
             var results = softmax.calculate(testArray);
@@ -74,7 +75,7 @@ namespace NeuNeXTests.Activations
         [TestMethod]
         public void TestLargeArray()
         {
-            double[] testArray = new double[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
+            var testArray = new List<double> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 1};
             double[] expectedResults = new double[] {
                 0.00021203402847926256,
                 0.00057636824663014714,
