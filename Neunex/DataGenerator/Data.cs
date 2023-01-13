@@ -25,7 +25,7 @@ namespace Neunex.DataGenerator
         {
             List<double> generated = new List<double> (new double[size]);
 
-            generated[indexKey - 1] = GetRandomNumber((double)0, (double)100);
+            generated[indexKey - 1] = GetRandomNumber((double)0, (double)10);
 
             for (int x = 0; x < generated.Count; x++)
             {

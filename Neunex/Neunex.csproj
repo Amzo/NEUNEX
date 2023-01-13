@@ -266,6 +266,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activations\softmax.cs" />
+    <Compile Include="Benchmarks\Baseline.cs" />
     <Compile Include="DataGenerator\DataPoint.cs" />
     <Compile Include="DataGenerator\Data.cs" />
     <Compile Include="DataGenerator\IData.cs" />

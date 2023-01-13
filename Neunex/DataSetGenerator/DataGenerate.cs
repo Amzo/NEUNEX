@@ -1,11 +1,13 @@
 ﻿using Neunex.DataGenerator;
 using Neunex.LabelEncoding;
+using Numpy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Neunex.DataSetGenerator
 {
@@ -15,6 +17,17 @@ namespace Neunex.DataSetGenerator
         {
             DataSet gen = new DataSet();
             return gen.DataSetGen(quantity, encodedLabels);
+        }
+
+        public static ((NDarray, NDarray), (NDarray, NDarray)) Cifar10()
+        {
+            DataSet gen = new DataSet();
+            return gen.Cifar10();
+        }
+        public static List<NDarray> Split(int amount, NDarray dataset) 
+        { 
+            DataSet gen = new DataSet();
+            return gen.splitDataSet(amount, dataset);
         }
     }
 }
