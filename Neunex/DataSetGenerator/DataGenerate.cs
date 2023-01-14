@@ -24,10 +24,10 @@ namespace Neunex.DataSetGenerator
             DataSet gen = new DataSet();
             return gen.Cifar10();
         }
-        public static List<NDarray> Split(int amount, NDarray dataset) 
+        public static List<NDarray> Split(int amount, NDarray dataset, NDarray labels) 
         { 
             DataSet gen = new DataSet();
-            return gen.splitDataSet(amount, dataset);
+            return gen.SplitDataSet(amount, dataset, labels);
         }
     }
 }

@@ -1,19 +1,17 @@
-﻿using BenchmarkDotNet.Attributes;
-using Keras.Datasets;
+﻿using Keras.Datasets;
 using Neunex.DataGenerator;
 using Neunex.LabelEncoding;
 using Numpy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using static BenchmarkDotNet.Engines.EngineEventSource;
 
 namespace Neunex.DataSetGenerator
 {
     internal class DataSet: IDataSet
     {
-        [Benchmark]
         public (double[], int[]) DataSetGen(int quantity, Dictionary<int, LabelStringKey> encodedLabels)
         {
             List <double> dataset = new List<double>(quantity * encodedLabels.Count());

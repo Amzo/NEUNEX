@@ -1,5 +1,4 @@
-﻿using BenchmarkDotNet.Attributes;
-using Neunex.Activations;
+﻿using Neunex.Activations;
 using Neunex.LabelEncoding;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ namespace Neunex.DataGenerator
         private static readonly Random random = new Random();
         private static readonly object syncLock = new object();
 
-        [Benchmark]
         private static double GetRandomNumber(double minimum, double maximum)
         {
             lock (syncLock)
@@ -20,7 +18,6 @@ namespace Neunex.DataGenerator
             }
         }
 
-        [Benchmark]
         public List<double> generateDataPoint(int size, int indexKey, LabelStringKey encodedLabels)
         {
             List<double> generated = new List<double> (new double[size]);
