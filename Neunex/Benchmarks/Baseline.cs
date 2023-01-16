@@ -11,6 +11,24 @@ namespace Neunex.Benchmarks
 {
     public class Baseline
     {
+
+        private static Sequential createModel(int numLabels)
+        {
+            Shape input_shape = (32, 32, 3);
+            var model = new Sequential();
+            model.Add(new Conv2D(32, kernel_size: (3, 3).ToTuple(),
+                                    activation: "relu",
+                                    input_shape: input_shape));
+            model.Add(new Conv2D(64, (3, 3).ToTuple(), activation: "relu"));
+            model.Add(new MaxPooling2D(pool_size: (2, 2).ToTuple()));
+            model.Add(new Dropout(0.25));
+            model.Add(new Flatten());
+            model.Add(new Dense(128, activation: "relu"));
+            model.Add(new Dropout(0.5));
+            model.Add(new Dense(numLabels, activation: "softmax"));
+
+            return model;
+        }
         public static void cifar10Benchmark(int epoch, int batch)
         {
             var ((x_train, y_train), (x_test, y_test)) = DataGenerate.Cifar10();
@@ -39,6 +57,7 @@ namespace Neunex.Benchmarks
             Console.WriteLine($"Test accuracy: {score[1]}");
         }
 
+        // single machine benchmark on splits. Weights are reset after each loop to avoid transfer learning
         public static void NeunexBenchCifarSplit(int epoch, int batchsize, int splits)
         {
             var ((x_train, y_train), (x_test, y_test)) = DataGenerate.Cifar10();
@@ -66,12 +85,46 @@ namespace Neunex.Benchmarks
                 model.Compile(optimizer: "adam", loss: "categorical_crossentropy", metrics: new string[] { "accuracy" });
                 model.Fit(x_split[i], encoded, shuffle: true, batch_size: batchsize, epochs: epoch, verbose: 0);
 
-                var score = model.Evaluate(x_test, encoded2, verbose: 0);
+                var score = model.Evaluate(x_test, encoded2, verbose: 1);
                 model.SetWeights(weights);
                 Console.WriteLine($"MiniLearner {i} scores:");
                 Console.WriteLine($"Test loss: {score[0]}");
                 Console.WriteLine($"Test accuracy: {score[1]}");
             }
+        }
+
+        public static void convertToCArray()
+        {
+            var ((x_train, y_train), (x_test, y_test)) = DataGenerate.Cifar10();
+            DataGenerate.sortClasses(x_train, y_train);
+
+        }
+
+        public static int[,,,] loadSorted(string path)
+        {
+            return DataGenerate.loadSorted(path);
+        }
+
+        public static void NeunexTestBinarySplit()
+        {
+            int numLabels = 2;
+            var ((x_train, y_train), (x_test, y_test)) = DataGenerate.Cifar10();
+            //var (x_split, y_split) = 0, 0// DataGenerate.sortClasses(x_train, y_train);
+
+            //var (x, y) = DataGenerate.Split(10, x_split, y_split);
+
+           /* var catDog = np.concatenate((x[0], x[1]));
+            var catDoglabel = np.concatenate((y[0], y[1]));
+
+            var encoded = Keras.Utils.Util.ToCategorical(catDoglabel, );
+            var model = createModel(numLabels);
+
+            model.Compile(optimizer: "adam", loss: "categorical_crossentropy", metrics: new string[] { "accuracy" });
+            model.Fit(catDog, encoded, batch_size: 512, epochs: 1000, verbose: 1);
+
+            //var score = model.Evaluate(m_test, z_test, verbose: 0);
+            //Console.WriteLine($"Test loss: {score[0]}");
+            //Console.WriteLine($"Test accuracy: {score[1]}");*/
         }
 
         public void NeunexBenchGeneratedData()

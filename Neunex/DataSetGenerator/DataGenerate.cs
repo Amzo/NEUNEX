@@ -3,6 +3,7 @@ using Neunex.LabelEncoding;
 using Numpy;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -28,6 +29,19 @@ namespace Neunex.DataSetGenerator
         { 
             DataSet gen = new DataSet();
             return gen.SplitDataSet(amount, dataset, labels);
+        }
+
+        public static void sortClasses(NDarray dataset, NDarray labels)
+        {
+            DataSet gen = new DataSet();
+            gen.sortClasses(dataset, labels);
+        }
+
+        public static int[,,,] loadSorted(string filepath)
+        {
+            var dataset = (int[,,,])DataSet.ReadFromBinaryFile(filepath);
+
+            return dataset;
         }
     }
 }

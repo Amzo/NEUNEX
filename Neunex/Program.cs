@@ -18,8 +18,11 @@ namespace Neunex
             var watch = new System.Diagnostics.Stopwatch();
 
             watch.Start();
-            Baseline.NeunexBenchCifarSplit(50, 2048, 10);
+            //Baseline.NeunexBenchCifarSplit(50, 2048, 10);
             //Baseline.cifar10Benchmark(50, 2048);
+            //Baseline.NeunexTestBinarySplit();
+            Baseline.convertToCArray();
+            //var shite = Baseline.loadSorted("C:\\Users\\Amzo\\Documents\\GitHub\\NEUNEX\\sortedDataset");
             watch.Stop();
 
             Console.WriteLine($"Execution Time: {watch.ElapsedMilliseconds} ms");
